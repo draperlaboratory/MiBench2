@@ -56,9 +56,9 @@ struct in_addr {
     unsigned long s_addr;  // load with inet_aton()
 };
 
-int isascii(char c) { return 1;}
+int isascii_patricia(char c) { return 1;}
 
-unsigned int htonl(unsigned int x)
+unsigned int htonl_patricia(unsigned int x)
 {
     return x;
 }
@@ -90,10 +90,10 @@ inet_aton(const char *cp, struct in_addr *addr)
                 base = 8;
         }
         for (;;) {
-            if (isascii(c) && isdigit(c)) {
+            if (isascii_patricia(c) && isdigit(c)) {
                 val = (val * base) + (c - '0');
                 c = *++cp;
-            } else if (base == 16 && isascii(c) && isxdigit(c)) {
+            } else if (base == 16 && isascii_patricia(c) && isxdigit(c)) {
                 val = (val << 4) |
                 (c + 10 - (islower(c) ? 'a' : 'A'));
                 c = *++cp;
@@ -117,7 +117,7 @@ inet_aton(const char *cp, struct in_addr *addr)
     /*
      * Check for trailing characters.
      */
-    if (c != '\0' && (!isascii(c) || !isspace(c)))
+    if (c != '\0' && (!isascii_patricia(c) || !isspace(c)))
         return (0);
     /*
      * Concoct the address according to
@@ -151,7 +151,7 @@ inet_aton(const char *cp, struct in_addr *addr)
             break;
     }
     if (addr)
-        addr->s_addr = htonl(val);
+        addr->s_addr = htonl_patricia(val);
     return (1);
 }
 
@@ -260,7 +260,7 @@ main()
 		 * node.
 		 */
 		p->p_key = addr.s_addr;		/* Network-byte order */
-		p->p_m->pm_mask = htonl(mask);
+		p->p_m->pm_mask = htonl_patricia(mask);
 
 		pfind=pat_search(addr.s_addr,phead);
 		//printf("%08x %08x %08x\n",p->p_key, addr.s_addr, p->p_m->pm_mask);
