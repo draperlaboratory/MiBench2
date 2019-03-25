@@ -4,21 +4,6 @@
 
 #include "testdata.h"
 
-void hexstring ( unsigned int d ); //printf("%08X\n");
-void hexstrings ( unsigned int d ); //printf("%08X ");
-void hexstringcr ( unsigned int d ); //printf("%08X\r");
-
-void *memcpy(void *str1, const void *str2, unsigned int n)
-{
-    while(n > 0)
-    {
-        ((unsigned char *)str1)[n] = ((unsigned char *)str2)[n];
-        --n;
-    }
-    
-    return str1;
-}
-
 unsigned char edata[TESTDATALEN];
 unsigned char udata[TESTDATALEN];
 
@@ -128,8 +113,6 @@ int run_tea_test ( void )
 
     ArcfourContext mycontext;
 
-    hexstring(0x12345678);
-
     errors=0;
 
     /* Initialize the algoritm */
@@ -151,18 +134,14 @@ int run_tea_test ( void )
         if(udata[ra]!=testdata[ra])
         {
             errors++;
-            hexstrings(ra); hexstrings(udata[ra]); hexstring(testdata[ra]);
         }
         if(errors>20) break;
     }
-    hexstring(errors);
     if(errors)
     {
-        hexstring(0xBADBAD99);
         return(1);
     }
 
-    hexstring(0x12345678);
     return(0);
 }
 

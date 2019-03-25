@@ -1,4 +1,4 @@
-OBJS = uart.o rc4test.o embedded.o
+OBJS = rc4test.o embedded.o
 
 include ../Makefile.mk
 
