@@ -3,7 +3,9 @@
 //#include <stdio.h>
 int benchmark();
 
+#ifndef RUNS
 #define RUNS 1
+#endif
 
 int main(void)
 {

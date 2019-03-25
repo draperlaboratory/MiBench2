@@ -2,6 +2,9 @@ CC      := riscv64-unknown-elf-gcc
 OBJDUMP := riscv64-unknown-elf-objdump
 OBJCOPY := riscv64-unknown-elf-objcopy
 
+# Allow users to override the number of time to run a benchmark.
+RUNS ?= 1
+
 # Allow users to override the UART's baud rate.
 UART_BAUD_RATE ?= 115200
 
@@ -40,6 +43,7 @@ CFLAGS := \
 	$(RISCV_FLAGS) \
 	-DBARE_METAL \
 	-DCLOCKS_PER_SEC=$(CLOCKS_PER_SEC) \
+	-DRUNS=$(RUNS) \
 	-DUART_BAUD_RATE=$(UART_BAUD_RATE) \
 	-O2 \
 	-Wall \
