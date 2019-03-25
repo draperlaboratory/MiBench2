@@ -11,6 +11,6 @@ jpegdata.h : bintoc.c
 more_clean :
 	rm -rf host out.bmp bintoc jpegdata.h
 
-OBJS = uart.o picojpeg.o picojpegtest.o embedded.o
+OBJS = picojpeg.o picojpegtest.o embedded.o
 
 include ../Makefile.mk

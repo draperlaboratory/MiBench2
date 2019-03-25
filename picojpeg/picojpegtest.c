@@ -1,8 +1,4 @@
 
-void hexstring ( unsigned int d ); //printf("%08X\n");
-void hexstrings ( unsigned int d ); //printf("%08X ");
-void hexstringcr ( unsigned int d ); //printf("%08X\r");
-
 #include <stdio.h>
 #include "picojpeg.h"
 #include "jpegdata.h"
@@ -90,7 +86,6 @@ int run_test ( void )
         return(1);
     }
     printf("---- sum 0x%08X 0x%08X\n",sum,sum);
-    hexstring(sum);
-    return(0);
+    return(sum);
 }
 
