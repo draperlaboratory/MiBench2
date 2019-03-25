@@ -8,6 +8,7 @@
 
 int benchmark();
 int ee_printf(const char *fmt, ...);
+void tohost_exit(uintptr_t code);  // From syscalls.c
 
 #ifndef RUNS
 #define RUNS 1
@@ -55,7 +56,10 @@ int main(void)
   {
     //puts("Trial\n\r");
     //printf("Run %d\n\r", run+1);
-    benchmark();
+    if (benchmark() != 0) {
+      ee_printf("FATAL ERROR: Benchmark failed.\n");
+      tohost_exit(1);
+    }
   }
   t_end = get_cycle_count();
 
