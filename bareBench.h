@@ -47,6 +47,7 @@ int main(void)
 
   // Initialize UART 16550 on the VCU118.
   uart0_init();
+  ee_printf("Starting benchmark...\n");
 
   // Run baseline
   //puts("Baseline\n\r");
