@@ -1,3 +1,105 @@
+# MiBench2 for SSITH
+
+This repository is a fork of the
+[MiBench2](https://github.com/impedimentToProgress/MiBench2)
+benchmark ported for the SSITH project.
+Please use the `ssith` branch for all SSITH-related work.
+
+Every directory in this project is a self-contained benchmark with a standalone
+`Makefile`.
+The following setting must be specified when compiling a MiBench2 binary:
+
+* `GFE_TARGET`: This can be set to `P1`, `P2`, or `P3`.
+
+The following settings can optionally be specified when compiling a MiBench2
+binary:
+
+* `RUNS`: Controls how many times a MiBench2 kernel runs.
+  There is no official guidance for how to set this variable.
+  This defaults to 1.
+* `UART_BAUD_RATE`: Control the baud rate for the VCU118's UART.
+  Each binary prints its results over the UART at the end of the test.
+  This defaults to 115200.
+
+Here is an example of compiling a MiBench2 benchmark (`basicmath`) for a P1
+processor to run for 2 iterations:
+
+```
+cd basicmath
+make GFE_TARGET=P1 RUNS=2
+```
+
+This produces an ELF file `basicmath/main.elf`, which can be run on the FPGA.
+
+There is also a script (`buildAll.sh`) to build every MiBench2 benchmark.
+Currently you cannot specify the `RUNS` or `UART_BAUD_RATE` parameters, those
+are set to default values.
+Here is an example of using that script to build benchmarks for P1:
+
+```
+./BuildAll.sh P1
+```
+
+This script automatically copies all of the output ELF files to the top-level
+directory.
+
+## Compile/Run Status
+
+As of commit `2d00d66f`, not all of the MiBench2 benchmarks are compiling or
+running on the GFE.
+The following benchmarks compile successfully:
+
+* adpcm_decode
+* adpcm_encode
+* aes
+* basicmath
+* blowfish
+* crc
+* dijkstra
+* fft
+* limits
+* picojpeg
+* qsort
+* randmath
+* rc4
+* rsa
+* sha
+
+The following benchmarks fail to compile:
+
+* bitcount
+* lzfx
+* overflow
+* patricia
+* regress
+* stringsearch
+* susan
+* vcflags
+
+Of the benchmarks that compile, the following have run-time errors on the GFE:
+
+* dijkstra
+* picojpeg
+* rsa
+* sha
+
+The following benchmarks should compile and run without errors on the GFE:
+
+* adpcm_decode
+* adpcm_encode
+* aes
+* basicmath
+* blowfish
+* crc
+* fft
+* limits
+* qsort
+* randmath
+* rc4
+
+The remainder of this document contains the original README from the [official
+MiBench2 repository](https://github.com/impedimentToProgress/MiBench2).
+
 # MiBench2
 [MiBench](http://vhosts.eecs.umich.edu/mibench/) ported for IoT devices.
 
